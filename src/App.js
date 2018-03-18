@@ -3,6 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bIsLoaded: false,
+      themes: []
+    };
+  }
   componentDidMount() {
     let url = "https://pagedip.com/api/theme";
     fetch(url, {
@@ -19,8 +26,12 @@ class App extends Component {
       window.alert("Network response was not ok.");
       console.log(response);
     })
-    .then(function(jsonData) {
-      console.log(jsonData);
+    .then( (jsonData) => {
+      this.setState({
+        bIsLoaded: true,
+        themes: jsonData.rows
+      })
+      console.log(this.state.themes);
     });
   }
 
