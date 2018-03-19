@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import ThemeList from './theme-list.js';
 import './App.css';
 
 class App extends Component {
@@ -13,6 +13,8 @@ class App extends Component {
   componentDidMount() {
     let url = "https://pagedip.com/api/theme";
     fetch(url, {
+      // The pagedip api endpoint here has Access-Control-Allow-Origin set to "*",
+      // so we don't need to include additional CORS headers in the request.
       headers: {
         'Authorization': "Bearer 7a76249a-6f74-4f81-8aec-30a8939ef42d",
         "Content-Type": "application/json"
@@ -31,22 +33,15 @@ class App extends Component {
         bIsLoaded: true,
         themes: jsonData.rows
       })
-      console.log(this.state.themes);
     });
   }
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+    if (this.state.bIsLoaded) {
+      return <ThemeList data={this.state.themes[0]}/>;
+    } else {
+      return <h1>Loading themes...</h1>;
+    }
   }
 }
 
