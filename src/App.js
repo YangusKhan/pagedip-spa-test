@@ -38,7 +38,13 @@ class App extends Component {
 
   render() {
     if (this.state.bIsLoaded) {
-      return <ThemeList data={this.state.themes[0]}/>;
+      return (
+        <ul>
+        { this.state.themes.map((theme) => 
+          <ThemeList key={theme.guid} data={theme}/>
+        )}
+        </ul>
+      );
     } else {
       return <h1>Loading themes...</h1>;
     }

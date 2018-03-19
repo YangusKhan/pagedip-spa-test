@@ -12,11 +12,11 @@ class ThemeList extends Component {
   render() {
     let ownerName = (this.props.data.owner === "_default") ? "Default Theme" : this.props.data.owner;
     return (
-      <div className="theme-list" onClick={this.showDetails.bind(this)}>
+      <li className="theme-list" onClick={this.showDetails.bind(this)}>
         <h2>{this.props.data.title}</h2>
         <h4>{ownerName}</h4>
         { this.state.bShowDetails ? ( <ThemeDetails data={this.props.data} /> ) : ( "" ) }
-      </div>
+      </li>
     );
   }
 
