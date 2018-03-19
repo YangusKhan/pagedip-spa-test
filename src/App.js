@@ -37,17 +37,20 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.bIsLoaded) {
-      return (
-        <ul>
+    let renderElement = (this.state.bIsLoaded) ? (
+      <ul>
         { this.state.themes.map((theme) => 
           <ThemeList key={theme.guid} data={theme}/>
         )}
-        </ul>
+      </ul>
+      ) : (
+        <h1>Loading themes...</h1>
       );
-    } else {
-      return <h1>Loading themes...</h1>;
-    }
+    return (
+      <div id="app-content">
+        {renderElement}
+      </div>
+    );
   }
 }
 
